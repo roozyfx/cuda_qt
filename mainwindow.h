@@ -31,5 +31,5 @@ private:
     Ui::MainWindow* ui;
     QString _imageFile { "" };
     QPixmap* _image { nullptr };
-    QLabel* _lbl { new QLabel() };
+    // QLabel* _lbl { nullptr };
 };

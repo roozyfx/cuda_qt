@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1962</width>
-    <height>1181</height>
+    <width>1667</width>
+    <height>939</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,49 +34,98 @@
    <widget class="QSplitter" name="splitter">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>1901</width>
-      <height>1091</height>
+      <x>0</x>
+      <y>20</y>
+      <width>1641</width>
+      <height>861</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>400</width>
+      <height>300</height>
+     </size>
     </property>
     <property name="orientation">
      <enum>Qt::Orientation::Horizontal</enum>
     </property>
-    <widget class="QWidget" name="verticalLayoutWidget">
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QPushButton" name="pbGrayScale">
-        <property name="text">
-         <string>GrayScale</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pbBlur">
-        <property name="text">
-         <string>Blur</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pbReset">
-        <property name="text">
-         <string>Reset</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+    <widget class="QWidget" name="widget_2" native="true">
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>141</width>
+        <height>811</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="pbGrayScale">
+         <property name="text">
+          <string>GrayScale</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbBlur">
+         <property name="text">
+          <string>Blur</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbReset">
+         <property name="text">
+          <string>Reset</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
-    <widget class="QWidget" name="gridLayoutWidget">
-     <layout class="QGridLayout" name="gridLayout">
-      <property name="sizeConstraint">
-       <enum>QLayout::SizeConstraint::SetNoConstraint</enum>
+    <widget class="QWidget" name="wgtMain" native="true">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(131, 148, 150);
+</string>
+     </property>
+     <widget class="QLabel" name="lblmage">
+      <property name="geometry">
+       <rect>
+        <x>-1</x>
+        <y>-1</y>
+        <width>1431</width>
+        <height>861</height>
+       </rect>
       </property>
-      <property name="spacing">
-       <number>10</number>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-     </layout>
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>300</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Load an Image</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+      <property name="margin">
+       <number>2</number>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -85,7 +134,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1962</width>
+     <width>1667</width>
      <height>28</height>
     </rect>
    </property>
