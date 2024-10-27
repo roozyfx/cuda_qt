@@ -10,9 +10,12 @@ MainWindow::MainWindow(QWidget* parent)
 {
     ui->setupUi(this);
     setFileMenuActions();
+    setSidebarActions();
     setWindowTitle("Qudapulation");
     _winSize = this->size();
-    _cif = new CudaImageFuncs(this);
+    _cif = new CudaImageFuncs();
+
+    setCudaFuncConnections();
 }
 
 MainWindow::~MainWindow()
@@ -38,12 +41,26 @@ void MainWindow::openFile()
 
 void MainWindow::setFileMenuActions()
 {
-    ui->actOpenImage->setShortcut(QKeySequence(tr("Ctrl+O", "Open")));
-    ui->actExit->setShortcut(QKeySequence(tr("Alt+x", "Exit")));
+    // ui->actOpenImage->setShortcut(QKeySequence(tr("Ctrl+O", "Open")));
+    // ui->actExit->setShortcut(QKeySequence(tr("Alt+x", "Exit")));
     connect(ui->actOpenImage, &QAction::triggered, this, &MainWindow::openFile);
     connect(ui->actExit, &QAction::triggered, this, &QApplication::quit);
+}
 
-    // connect(ui->pbGrayScale, &QPushButton::released, this, &MainWindow::test);
+void MainWindow::setSidebarActions()
+{
+    connect(ui->pbGrayScale, &QPushButton::released, this, &MainWindow::pbGrayScale);
+    connect(ui->pbBlur, &QPushButton::released, this, &MainWindow::pbBlur);
+    connect(ui->pbReset, &QPushButton::released, this, &MainWindow::pbReset);
+}
+
+void MainWindow::setCudaFuncConnections()
+{
+    if (_cif) {
+        connect(this, &MainWindow::sigGrayScale, _cif, &CudaImageFuncs::grayScale);
+        connect(this, &MainWindow::sigBlur, _cif, &CudaImageFuncs::blur);
+        connect(this, &MainWindow::sigReset, _cif, &CudaImageFuncs::reset);
+    }
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)
@@ -60,7 +77,7 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     //     // if (_image) {
     //     //     ui->lblmage->setScaledContents(true);
     //     //     ui->lblmage->size
-    //     //         ui->lblmage->setPixmap(_image->scaled(ui->lblmage->size().width() * w_r,
+    //     // ui->lblmage->setPixmap(_image->scaled(ui->lblmage->size().width() * w_r,
     //     //             ui->lblmage->size().height() * h_r, Qt::KeepAspectRatio,
     //     //             Qt::TransformationMode::FastTransformation));
     //     //     ui->lblmage->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
@@ -70,8 +87,16 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     //     // }
     // }
 }
-#include <iostream>
-void MainWindow::test()
+
+void MainWindow::pbGrayScale()
 {
-    std::cout << "Test button in MainWindow\n";
+    emit sigGrayScale(true);
+}
+void MainWindow::pbBlur()
+{
+    emit sigBlur(true);
+}
+void MainWindow::pbReset()
+{
+    emit sigReset(true);
 }

@@ -1,15 +1,9 @@
 #include "cudaImageFuncs.h"
-// #include "./ui_mainwindow.h"
 #include <QFileDialog>
 #include <iostream>
 
-CudaImageFuncs::CudaImageFuncs(QWidget* parent)
-// : ui(new Ui::MainWindow)
+CudaImageFuncs::CudaImageFuncs()
 {
-    _parent = parent;
-    this->setParent(_parent);
-
-    // connect(ui->pbGrayScale, &QPushButton::released, this, &CudaImageFuncs::test);
 }
 
 CudaImageFuncs::~CudaImageFuncs()
@@ -20,14 +14,32 @@ CudaImageFuncs::~CudaImageFuncs()
 
 void CudaImageFuncs::openImage()
 {
-    auto imageFile { QFileDialog::getOpenFileName(_parent, tr("Open Image"), "/home/user/Documents/FxPhotos",
+    QWidget* temp { new QWidget() };
+    auto imageFile { QFileDialog::getOpenFileName(temp, tr("Open Image"), "/home/user/Documents/FxPhotos",
         tr("Image Files (*.png "
            "*.jpg *.jpeg *.JPG "
            "*.JPEG *.bmp)")) };
     _image = new QImage(imageFile);
+    delete temp;
 }
 
-void CudaImageFuncs::test()
+void CudaImageFuncs::grayScale(bool bReleased)
 {
-    std::cout << "Gray Scale Button\n";
+    if (bReleased) {
+        std::cout << "Gray Scale Button\n";
+    }
+}
+
+void CudaImageFuncs::blur(bool bReleased)
+{
+    if (bReleased) {
+        std::cout << "Blur Button\n";
+    }
+}
+
+void CudaImageFuncs::reset(bool bReleased)
+{
+    if (bReleased) {
+        std::cout << "Reset Button\n";
+    }
 }

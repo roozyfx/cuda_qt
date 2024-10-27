@@ -18,18 +18,25 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
-    // inline Ui::MainWindow* getUi() { return ui; }
+    Ui::MainWindow* getUi() { return ui; }
 private slots:
     void openFile();
 
 private:
     void setFileMenuActions();
+    void setSidebarActions();
+    void setCudaFuncConnections();
     void resizeEvent(QResizeEvent* event) final;
+    void pbGrayScale();
+    void pbBlur();
+    void pbReset();
+
     Ui::MainWindow* ui;
     QSize _winSize;
     CudaImageFuncs* _cif { nullptr };
 
-public slots:
-    // void test(QPushButton*, void (*)(), MainWindow*, );
-    void test();
+signals:
+    void sigGrayScale(bool bReleased);
+    void sigBlur(bool bReleased);
+    void sigReset(bool bReleased);
 };
