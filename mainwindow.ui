@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1667</width>
-    <height>939</height>
+    <width>1717</width>
+    <height>1035</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -31,101 +31,104 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <widget class="QSplitter" name="splitter">
+   <widget class="QWidget" name="wgtSidebar" native="true">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>20</y>
-      <width>1641</width>
-      <height>861</height>
+      <x>10</x>
+      <y>10</y>
+      <width>150</width>
+      <height>880</height>
      </rect>
     </property>
     <property name="sizePolicy">
-     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
-    <property name="minimumSize">
-     <size>
-      <width>400</width>
-      <height>300</height>
-     </size>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Orientation::Horizontal</enum>
-    </property>
-    <widget class="QWidget" name="widget_2" native="true">
-     <widget class="QWidget" name="verticalLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>141</width>
-        <height>811</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QPushButton" name="pbGrayScale">
-         <property name="text">
-          <string>GrayScale</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pbBlur">
-         <property name="text">
-          <string>Blur</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pbReset">
-         <property name="text">
-          <string>Reset</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="wgtMain" native="true">
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(131, 148, 150);
-</string>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>21</y>
+       <width>109</width>
+       <height>841</height>
+      </rect>
      </property>
-     <widget class="QLabel" name="lblmage">
-      <property name="geometry">
-       <rect>
-        <x>-1</x>
-        <y>-1</y>
-        <width>1431</width>
-        <height>861</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>400</width>
-        <height>300</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Load an Image</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
-      </property>
-      <property name="margin">
-       <number>2</number>
-      </property>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="pbGrayScale">
+        <property name="text">
+         <string>GrayScale</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbBlur">
+        <property name="text">
+         <string>Blur</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbReset">
+        <property name="text">
+         <string>Reset</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="wgtMain" native="true">
+    <property name="geometry">
+     <rect>
+      <x>203</x>
+      <y>10</y>
+      <width>1461</width>
+      <height>879</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(131, 148, 150);
+</string>
+    </property>
+    <widget class="QLabel" name="lblmage">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>15</y>
+       <width>1441</width>
+       <height>851</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>300</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Load an Image</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+     <property name="margin">
+      <number>5</number>
+     </property>
     </widget>
    </widget>
   </widget>
@@ -134,7 +137,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1667</width>
+     <width>1717</width>
      <height>28</height>
     </rect>
    </property>
@@ -158,19 +161,19 @@ selection-background-color: rgb(255, 163, 72);</string>
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionOpen_Image"/>
+    <addaction name="actOpenImage"/>
     <addaction name="separator"/>
-    <addaction name="actionExit"/>
+    <addaction name="actExit"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionOpen_Image">
+  <action name="actOpenImage">
    <property name="text">
     <string>Open Image</string>
    </property>
   </action>
-  <action name="actionExit">
+  <action name="actExit">
    <property name="text">
     <string>Exit</string>
    </property>

@@ -15,7 +15,11 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
+        cudaImageFuncs.cpp
+
         mainwindow.h
+        cudaImageFuncs.h
+
         mainwindow.ui
 )
 

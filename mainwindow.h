@@ -1,10 +1,8 @@
 #pragma once
+#include "cudaImageFuncs.h"
 #include <QLabel>
 #include <QMainWindow>
-#include <QPixmap>
 #include <QResizeEvent>
-#include <QString>
-#include <QTimer>
 #include <memory>
 
 QT_BEGIN_NAMESPACE
@@ -13,8 +11,6 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
-static const int RESIZE_TIMEOUT = 250; // 1/4 second in milliseconds
-
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
@@ -22,6 +18,7 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    // inline Ui::MainWindow* getUi() { return ui; }
 private slots:
     void openFile();
 
@@ -29,7 +26,10 @@ private:
     void setFileMenuActions();
     void resizeEvent(QResizeEvent* event) final;
     Ui::MainWindow* ui;
-    QString _imageFile { "" };
-    QPixmap* _image { nullptr };
-    // QLabel* _lbl { nullptr };
+    QSize _winSize;
+    CudaImageFuncs* _cif { nullptr };
+
+public slots:
+    // void test(QPushButton*, void (*)(), MainWindow*, );
+    void test();
 };
