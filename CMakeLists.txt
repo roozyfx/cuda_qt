@@ -1,13 +1,26 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(CudaQt VERSION 0.1 LANGUAGES CXX)
+# # Set GCC and G++ paths explicitly to v.13 so nvcc supports it.
+# # Although didn't work and had to set gcc/g++ version using:
+# # sudo update-alternatives --config g++
+# set(CMAKE_C_COMPILER /usr/bin/gcc-13)
+# set(CMAKE_CXX_COMPILER /usr/bin/g++-13)
+set(CMAKE_CUDA_COMPILER "/usr/local/cuda-12.5/bin/nvcc")
+project(CudaQt VERSION 0.2 LANGUAGES CXX CUDA)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
+  set(CMAKE_CUDA_ARCHITECTURES 75)
+endif()
+if(NOT DEFINED CMAKE_CUDA_STANDARD)
+    set(CMAKE_CUDA_STANDARD 20)
+    set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+endif()
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
