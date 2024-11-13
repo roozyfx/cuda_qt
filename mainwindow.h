@@ -19,6 +19,10 @@ public:
     ~MainWindow();
 
     Ui::MainWindow* getUi() { return ui; }
+
+public slots:
+    void showResult();
+
 private slots:
     void openFile();
 
