@@ -1,4 +1,5 @@
 #pragma once
+#include <QFileDialog>
 #include <QImage>
 #include <QObject>
 #include <QWidget>
@@ -16,6 +17,11 @@ public:
     {
         return _image;
     }
+
+    inline QImage* resultImage()
+    {
+        return _imageResult;
+    }
 public slots:
     void grayScale(bool bReleased);
     void blur(bool bReleased);
@@ -24,4 +30,10 @@ public slots:
 private:
     QWidget* _parent { nullptr };
     QImage* _image { nullptr };
+    QImage* _imageResult { nullptr };
+    uchar* _inputImage_d { nullptr };
+    uchar* _outputImage_d { nullptr };
+
+signals:
+    void sigShowResult();
 };

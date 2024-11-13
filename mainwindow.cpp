@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include <QPixmap>
 #include <QSizePolicy>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -60,6 +61,8 @@ void MainWindow::setCudaFuncConnections()
         connect(this, &MainWindow::sigGrayScale, _cif, &CudaImageFuncs::grayScale);
         connect(this, &MainWindow::sigBlur, _cif, &CudaImageFuncs::blur);
         connect(this, &MainWindow::sigReset, _cif, &CudaImageFuncs::reset);
+
+        connect(_cif, &CudaImageFuncs::sigShowResult, this, &MainWindow::showResult);
     }
 }
 
@@ -99,4 +102,19 @@ void MainWindow::pbBlur()
 void MainWindow::pbReset()
 {
     emit sigReset(true);
+}
+
+void MainWindow::showResult()
+{
+    if (_cif->resultImage()) {
+        std::cout << "showResult: Line 109" << std::endl;
+        // ui->lblmage->setParent(ui->wgtMain);
+        ui->lblmage->setPixmap(QPixmap::fromImage(*_cif->resultImage()));
+        ui->lblmage->setScaledContents(true);
+        ui->lblmage->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
+        ui->lblmage->setAlignment(Qt::AlignCenter | Qt::AlignJustify);
+        std::cout << "showResult: Line 115" << std::endl;
+        ui->lblmage->show();
+        std::cout << "showResult: Line 117" << std::endl;
+    }
 }
