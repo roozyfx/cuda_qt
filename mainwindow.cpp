@@ -53,6 +53,8 @@ void MainWindow::setSidebarActions()
     connect(ui->pbGrayScale, &QPushButton::released, this, &MainWindow::pbGrayScale);
     connect(ui->pbBlur, &QPushButton::released, this, &MainWindow::pbBlur);
     connect(ui->pbReset, &QPushButton::released, this, &MainWindow::pbReset);
+    connect(ui->pbTest, &QPushButton::released, this, &MainWindow::pbTest);
+    connect(ui->pbExit, &QPushButton::released, this, &QApplication::quit);
 }
 
 void MainWindow::setCudaFuncConnections()
@@ -102,6 +104,29 @@ void MainWindow::pbBlur()
 void MainWindow::pbReset()
 {
     emit sigReset(true);
+}
+
+void MainWindow::pbPB1()
+{
+}
+
+void MainWindow::pbPB2()
+{
+}
+
+// FXTODO Clean-up: Only to test and load an image quickly
+void MainWindow::pbTest()
+{
+    _cif->test(true);
+
+    if (_cif->image()) {
+        ui->lblmage->setParent(ui->wgtMain);
+        ui->lblmage->setPixmap(QPixmap::fromImage(*_cif->image()));
+        ui->lblmage->setScaledContents(true);
+        ui->lblmage->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
+        ui->lblmage->setAlignment(Qt::AlignCenter | Qt::AlignJustify);
+        ui->lblmage->show();
+    }
 }
 
 void MainWindow::showResult()
