@@ -34,6 +34,9 @@ private:
     void pbGrayScale();
     void pbBlur();
     void pbReset();
+    void pbPB1();
+    void pbPB2();
+    void pbTest();
 
     Ui::MainWindow* ui;
     QSize _winSize;
@@ -43,4 +46,5 @@ signals:
     void sigGrayScale(bool bReleased);
     void sigBlur(bool bReleased);
     void sigReset(bool bReleased);
+    void sigTest(bool bReleased);
 };

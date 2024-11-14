@@ -26,11 +26,12 @@ public slots:
     void grayScale(bool bReleased);
     void blur(bool bReleased);
     void reset(bool bReleased);
+    void test(bool bReleased);
 
 private:
     QWidget* _parent { nullptr };
     QImage* _image { nullptr };
-    QImage* _imageResult { nullptr };
+    QImage* _imageResult { new QImage() };
     uchar* _inputImage_d { nullptr };
     uchar* _outputImage_d { nullptr };
 
