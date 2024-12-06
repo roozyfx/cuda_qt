@@ -6,11 +6,11 @@ constexpr int CHANNELS = 3;
 
 __global__ void colorToGrayScale_kernel(uchar* Pin, uchar* Pout, int width, int height)
 {
-    int row { blockIdx.y * blockDim.y + threadIdx.y };
-    int col { blockIdx.x * blockDim.x + threadIdx.x };
+    uint row { blockIdx.y * blockDim.y + threadIdx.y };
+    uint col { blockIdx.x * blockDim.x + threadIdx.x };
     if (row < height && col < width) {
-        int grayScaleOffset { row * width + col };
-        int colorOffset { grayScaleOffset * CHANNELS };
+        uint grayScaleOffset { row * width + col };
+        uint colorOffset { grayScaleOffset * CHANNELS };
         uchar r { Pin[colorOffset + 0] };
         uchar g { Pin[colorOffset + 1] };
         uchar b { Pin[colorOffset + 2] };
@@ -21,8 +21,8 @@ __global__ void colorToGrayScale_kernel(uchar* Pin, uchar* Pout, int width, int 
 
 __global__ void blur_kernel(uchar* Pin, uchar* Pout, int width, int height, int blurSize)
 {
-    int row { blockDim.y * blockIdx.y + threadIdx.y };
-    int col { blockDim.x * blockIdx.x + threadIdx.x };
+    int row { static_cast<int>(blockDim.y * blockIdx.y + threadIdx.y) };
+    int col { static_cast<int>(blockDim.x * blockIdx.x + threadIdx.x) };
 
     if (row >= height || col >= width)
         return;
@@ -96,10 +96,10 @@ void CudaImageFuncs::grayScale(bool bReleased)
             if (_image->format() == QImage::Format_Grayscale8 || _image->format() == QImage::Format_Grayscale16 || _image->format() == QImage::Format_Indexed8 || _image->format() == QImage::Format_Mono || _image->format() == QImage::Format_MonoLSB) {
                 return;
             }
-            int width { _image->width() };
-            int height { _image->height() };
-            int size { width * height * sizeof(uchar) };
-            int size_color { size * CHANNELS };
+            const int width { _image->width() };
+            const int height { _image->height() };
+            const int size { static_cast<int>(width * height * sizeof(uchar)) };
+            const int size_color { size * CHANNELS };
             uchar* result_h = new uchar[size];
 
             // allocate memory on device
@@ -132,7 +132,7 @@ void CudaImageFuncs::blur(bool bReleased)
         if (_image) {
             const int width { _image->width() };
             const int height { _image->height() };
-            const int size { width * height * CHANNELS * sizeof(uchar) };
+            const int size { static_cast<int>(width * height * CHANNELS * sizeof(uchar)) };
             std::cout << "Width x Height:" << width << "x" << height << std::endl;
             std::cout << "size: " << size << std::endl;
 

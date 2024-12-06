@@ -1,9 +1,9 @@
 #pragma once
-#include "/usr/local/cuda-12.5/include/driver_types.h"
 #include <QFileDialog>
 #include <QImage>
 #include <QObject>
 #include <QWidget>
+#include <driver_types.h>
 #include <string>
 
 class CudaImageFuncs : public QWidget {
@@ -51,7 +51,7 @@ private:
 
     std::vector<cudaDeviceProp> _info;
 
-    void _loadImage (QString filename);
+    void _loadImage(QString filename);
 
 signals:
     void sigShowResult();
