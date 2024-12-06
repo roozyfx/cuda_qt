@@ -14,6 +14,7 @@ set(CMAKE_AUTORCC ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(CUDAToolkit)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -37,8 +38,10 @@ set(CPP_SOURCES
         mainwindow.h
 
         mainwindow.ui
+        about.ui
 )
 
+include_directories(${CUDAToolkit_INCLUDE_DIRS})
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(${CMAKE_PROJECT_NAME}
         MANUAL_FINALIZATION
@@ -68,7 +71,9 @@ set(CUDA_SOURCES
 
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${CUDA_SOURCES})
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(${CMAKE_PROJECT_NAME}
+    PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets
+            CUDA::cudart CUDA::cuda_driver)
 
 # Specify CUDA properties
 # Use `g++` as the C++ compiler for standard files and `nvcc` only for CUDA files

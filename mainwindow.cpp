@@ -1,10 +1,11 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include <QDockWidget>
 #include <QFileDialog>
 #include <QPixmap>
 #include <QSizePolicy>
+#include <QTableView>
 #include <iostream>
-
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -40,12 +41,24 @@ void MainWindow::openFile()
     }
 }
 
+void MainWindow::displayAbout()
+{
+    if (_cif) {
+        QDialog* qdAbout = new QDialog(this);
+        // FXTODO: Create a table instead of this label
+        QLabel* lblAbout = new QLabel(qdAbout);
+        lblAbout->setText(QString(_cif->info().at(0).c_str()));
+        qdAbout->setMinimumSize(400, 500);
+        qdAbout->show();
+    }
+}
+
 void MainWindow::setFileMenuActions()
 {
-    // ui->actOpenImage->setShortcut(QKeySequence(tr("Ctrl+O", "Open")));
-    // ui->actExit->setShortcut(QKeySequence(tr("Alt+x", "Exit")));
     connect(ui->actOpenImage, &QAction::triggered, this, &MainWindow::openFile);
     connect(ui->actExit, &QAction::triggered, this, &QApplication::quit);
+    connect(ui->actAbout, &QAction::triggered, this, &MainWindow::sigAbout);
+    connect(ui->actAbout, &QAction::triggered, this, &MainWindow::displayAbout);
 }
 
 void MainWindow::setSidebarActions()
@@ -63,6 +76,7 @@ void MainWindow::setCudaFuncConnections()
         connect(this, &MainWindow::sigGrayScale, _cif, &CudaImageFuncs::grayScale);
         connect(this, &MainWindow::sigBlur, _cif, &CudaImageFuncs::blur);
         connect(this, &MainWindow::sigReset, _cif, &CudaImageFuncs::reset);
+        connect(this, &MainWindow::sigAbout, _cif, &CudaImageFuncs::queryInfo);
 
         connect(_cif, &CudaImageFuncs::sigShowResult, this, &MainWindow::showResult);
     }
@@ -132,14 +146,11 @@ void MainWindow::pbTest()
 void MainWindow::showResult()
 {
     if (_cif->resultImage()) {
-        std::cout << "showResult: Line 109" << std::endl;
-        // ui->lblmage->setParent(ui->wgtMain);
+        ui->lblmage->setParent(ui->wgtMain);
         ui->lblmage->setPixmap(QPixmap::fromImage(*_cif->resultImage()));
         ui->lblmage->setScaledContents(true);
         ui->lblmage->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
         ui->lblmage->setAlignment(Qt::AlignCenter | Qt::AlignJustify);
-        std::cout << "showResult: Line 115" << std::endl;
         ui->lblmage->show();
-        std::cout << "showResult: Line 117" << std::endl;
     }
 }

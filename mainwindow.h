@@ -25,6 +25,7 @@ public slots:
 
 private slots:
     void openFile();
+    void displayAbout();
 
 private:
     void setFileMenuActions();
@@ -47,4 +48,5 @@ signals:
     void sigBlur(bool bReleased);
     void sigReset(bool bReleased);
     void sigTest(bool bReleased);
+    void sigAbout();
 };
