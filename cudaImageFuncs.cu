@@ -149,7 +149,7 @@ void CudaImageFuncs::blur(bool bReleased)
             dim3 gridDim(std::ceil((float)(width) / blockDim.x),
                 std::ceil((float)(height) / blockDim.y));
             blur_kernel<<<gridDim, blockDim>>>(_inputImage_d, _outputImage_d,
-                width, height, 5);
+                width, height, _blurLevel);
 
             // Copy the results to host
             cudaMemcpy(result_h, _outputImage_d, size, cudaMemcpyDeviceToHost);

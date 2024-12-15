@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->setupUi(this);
     setFileMenuActions();
     setSidebarActions();
+    initUI();
     setWindowTitle("Qudapulation");
     _winSize = this->size();
     _cif = new CudaImageFuncs();
@@ -27,6 +28,11 @@ MainWindow::~MainWindow()
         delete _cif;
 }
 
+void MainWindow::initUI()
+{
+
+    sliderUpdate();
+}
 void MainWindow::openFile()
 {
     _cif->openImage();
@@ -65,6 +71,7 @@ void MainWindow::setSidebarActions()
 {
     connect(ui->pbGrayScale, &QPushButton::released, this, &MainWindow::pbGrayScale);
     connect(ui->pbBlur, &QPushButton::released, this, &MainWindow::pbBlur);
+    connect(ui->sldrBlur, &QSlider::sliderReleased, this, &MainWindow::sliderUpdate);
     connect(ui->pbReset, &QPushButton::released, this, &MainWindow::pbReset);
     connect(ui->pbTest, &QPushButton::released, this, &MainWindow::pbTest);
     connect(ui->pbExit, &QPushButton::released, this, &QApplication::quit);
@@ -140,6 +147,16 @@ void MainWindow::pbTest()
         ui->lblmage->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
         ui->lblmage->setAlignment(Qt::AlignCenter | Qt::AlignJustify);
         ui->lblmage->show();
+    }
+}
+
+void MainWindow::sliderUpdate()
+{
+    auto val { ui->sldrBlur->value() };
+    std::string str { "Blur(" + std::to_string(val) + ")" };
+    ui->pbBlur->setText(QString(str.c_str()));
+    if (_cif) {
+        _cif->setBlurLevel(val);
     }
 }
 

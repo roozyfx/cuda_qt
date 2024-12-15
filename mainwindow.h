@@ -28,6 +28,7 @@ private slots:
     void displayAbout();
 
 private:
+    void initUI();
     void setFileMenuActions();
     void setSidebarActions();
     void setCudaFuncConnections();
@@ -38,6 +39,7 @@ private:
     void pbPB1();
     void pbPB2();
     void pbTest();
+    void sliderUpdate();
 
     Ui::MainWindow* ui;
     QSize _winSize;

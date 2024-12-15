@@ -41,6 +41,10 @@ public slots:
     void test(bool bReleased);
 
     void queryInfo();
+    inline void setBlurLevel(const int bl)
+    {
+        _blurLevel = bl;
+    }
 
 private:
     QWidget* _parent { nullptr };
@@ -48,6 +52,7 @@ private:
     QImage* _imageResult { new QImage() };
     uchar* _inputImage_d { nullptr };
     uchar* _outputImage_d { nullptr };
+    int _blurLevel { 1 };
 
     std::vector<cudaDeviceProp> _info;
 
